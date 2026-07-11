@@ -30,7 +30,7 @@
         </nav>
 
         <!-- Center: Logo -->
-        <a href="/" class="nav-logo" aria-label="BrewHaven Home">
+        <a href="/" class="nav-logo" aria-label="BrewHaven Dashboard">
             <div class="logo-circle">
                 <div class="logo-icon">
                     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,8 +49,20 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                 Find a Store
             </a>
-            <a href="#" class="nav-link">Sign in</a>
-            <a href="#" class="nav-btn-join">Join now</a>
+            @auth
+                @if(auth()->user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Admin</a>
+                @else
+                    <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+                @endif
+                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                    @csrf
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="nav-btn-join">Log out</a>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="nav-link">Sign in</a>
+                <a href="{{ route('register') }}" class="nav-btn-join">Join now</a>
+            @endauth
         </nav>
 
         <!-- Mobile Hamburger -->
@@ -65,8 +77,20 @@
         <a href="#">Rewards</a>
         <a href="#">Gift Cards</a>
         <a href="#">Find a Store</a>
-        <a href="#">Sign in</a>
-        <a href="#" class="mobile-join">Join now</a>
+        @auth
+            @if(auth()->user()->isAdmin())
+                <a href="{{ route('admin.dashboard') }}">Admin</a>
+            @else
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+            @endif
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="mobile-join">Log out</a>
+            </form>
+        @else
+            <a href="{{ route('login') }}">Sign in</a>
+            <a href="{{ route('register') }}" class="mobile-join">Join now</a>
+        @endauth
     </div>
 </header>
 
@@ -163,7 +187,7 @@
                 <h2 class="hero-title" style="color:#fff;">Earn Stars,<br>Get Free Drinks</h2>
                 <p class="hero-sub" style="color:#d4e9e2;">Join BrewHaven Rewards and earn stars<br>with every purchase. The more you drink,<br>the more you save.</p>
                 <div class="hero-actions">
-                    <a href="#" class="btn-hero-gold">Join for free</a>
+                    <a href="{{ route('register') }}" class="btn-hero-gold">Join for free</a>
                     <a href="#" class="btn-hero-outline-white">Learn more</a>
                 </div>
             </div>
@@ -282,7 +306,7 @@
                     <p>Earn stars with every order. Redeem them for free drinks, food, and more. It's free to join.</p>
                 </div>
                 <div class="rewards-strip-actions">
-                    <a href="#" class="btn-white-green">Join for free</a>
+                    <a href="{{ route('register') }}" class="btn-white-green">Join for free</a>
                     <a href="#" class="btn-outline-white">Learn more</a>
                 </div>
             </div>
