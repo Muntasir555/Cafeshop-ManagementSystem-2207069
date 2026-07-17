@@ -1,0 +1,225 @@
+/* ============================================================
+   BrewHaven Gift Cards Page Styles
+   ============================================================ */
+
+/* Gift Cards Header/Nav */
+.gc-header {
+    background: var(--white);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--grey-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 800;
+}
+
+.gc-header h1 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Quick Links Grid */
+.gc-quick-links {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background: var(--green-pale);
+    overflow-x: auto;
+}
+
+.gc-quick-link-card {
+    flex: 1;
+    min-width: 200px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    color: var(--black);
+    text-decoration: none;
+}
+
+.gc-quick-link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.gc-quick-link-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: var(--green-primary);
+}
+
+.gc-quick-link-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* Featured Hero Section */
+.gc-hero {
+    display: flex;
+    min-height: 400px;
+    background: var(--green-darkest);
+    color: var(--white);
+    margin: 48px 24px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.gc-hero-text {
+    flex: 1;
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gc-hero-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    font-family: var(--font-display);
+}
+
+.gc-hero-text p {
+    font-size: 1.125rem;
+    color: var(--green-light);
+    margin-bottom: 32px;
+}
+
+.gc-hero-image-wrap {
+    flex: 1;
+    position: relative;
+}
+
+.gc-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+/* Gift Card Categories */
+.gc-category {
+    padding: 48px 24px;
+}
+
+.gc-category h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gc-cards-grid {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+}
+
+.gc-card-item {
+    flex: 0 0 280px;
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.gc-card-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+}
+
+.gc-card-img {
+    width: 100%;
+    aspect-ratio: 1.58 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+/* Check Balance Section */
+.gc-balance-section {
+    background: var(--grey-light);
+    padding: 64px 24px;
+    text-align: center;
+}
+
+.gc-balance-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.gc-balance-container h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.gc-balance-container p {
+    color: var(--grey-dark);
+    margin-bottom: 32px;
+}
+
+.gc-balance-form {
+    display: flex;
+    gap: 16px;
+}
+
+.gc-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--grey);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: var(--font-main);
+}
+
+.gc-btn {
+    background: var(--green-primary);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.gc-btn:hover {
+    background: var(--green-darkest);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gc-hero {
+        flex-direction: column;
+        margin: 24px 16px;
+    }
+    .gc-hero-image-wrap {
+        min-height: 250px;
+    }
+    .gc-hero-text {
+        padding: 32px;
+        text-align: center;
+    }
+    .gc-balance-form {
+        flex-direction: column;
+    }
+    .gc-quick-links {
+        padding: 16px;
+    }
+}

@@ -18,6 +18,11 @@ Route::get('/rewards', function () {
     return view('rewards');
 })->name('rewards');
 
+// ── Public gift cards page ────────────────────────────────────
+Route::get('/gift-cards', function () {
+    return view('gift-cards');
+})->name('gift.cards');
+
 // ── Public menu page ─────────────────────────────────────────
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 

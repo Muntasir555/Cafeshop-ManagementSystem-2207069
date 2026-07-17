@@ -27,7 +27,7 @@
             <a href="{{ url('/') }}" class="nav-link">Home</a>
             <a href="{{ route('menu') }}" class="nav-link">Menu</a>
             <a href="{{ route('rewards') }}" class="nav-link">Rewards</a>
-            <a href="#" class="nav-link">Gift Cards</a>
+            <a href="{{ route('gift.cards') }}" class="nav-link">Gift Cards</a>
         </nav>
 
         <!-- Center: Logo -->
@@ -77,7 +77,7 @@
         <a href="{{ url('/') }}">Home</a>
         <a href="{{ route('menu') }}">Menu</a>
         <a href="{{ route('rewards') }}">Rewards</a>
-        <a href="#">Gift Cards</a>
+        <a href="{{ route('gift.cards') }}">Gift Cards</a>
         <a href="#">Find a Store</a>
         @auth
             @if(auth()->user()->isAdmin())
