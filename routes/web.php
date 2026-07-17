@@ -7,6 +7,11 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StoreLocatorController;
+
+// ── Public store locator ─────────────────────────────────────
+Route::get('/find-store', [StoreLocatorController::class, 'index'])->name('stores.locator');
+Route::get('/api/stores', [StoreLocatorController::class, 'apiStores']);
 
 // ── Public homepage ──────────────────────────────────────────
 Route::get('/', function () {
