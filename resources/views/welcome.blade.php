@@ -24,8 +24,9 @@
 
         <!-- Left: Nav Links -->
         <nav class="nav-left">
-            <a href="#" class="nav-link">Menu</a>
-            <a href="#" class="nav-link">Rewards</a>
+            <a href="{{ url('/') }}" class="nav-link">Home</a>
+            <a href="{{ route('menu') }}" class="nav-link">Menu</a>
+            <a href="{{ route('rewards') }}" class="nav-link">Rewards</a>
             <a href="#" class="nav-link">Gift Cards</a>
         </nav>
 
@@ -73,8 +74,9 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#">Menu</a>
-        <a href="#">Rewards</a>
+        <a href="{{ url('/') }}">Home</a>
+        <a href="{{ route('menu') }}">Menu</a>
+        <a href="{{ route('rewards') }}">Rewards</a>
         <a href="#">Gift Cards</a>
         <a href="#">Find a Store</a>
         @auth
@@ -287,7 +289,7 @@
             </div>
 
             <div class="section-cta">
-                <a href="#" class="btn-outline-green">View full menu</a>
+                <a href="{{ route('menu') }}" class="btn-outline-green">View full menu</a>
             </div>
         </div>
     </section>
@@ -359,42 +361,42 @@
                 <h2 class="section-title">What Are You Craving?</h2>
             </div>
             <div class="categories-grid">
-                <a href="#" class="cat-card" id="cat-cold-drinks">
+                <a href="{{ route('menu') }}?category=Cold+Drinks" class="cat-card" id="cat-cold-drinks">
                     <div class="cat-icon">🧊</div>
                     <h3>Cold Drinks</h3>
                     <span class="cat-count">24 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-hot-drinks">
+                <a href="{{ route('menu') }}?category=Hot+Drinks" class="cat-card" id="cat-hot-drinks">
                     <div class="cat-icon">☕</div>
                     <h3>Hot Drinks</h3>
                     <span class="cat-count">18 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-frappuccino">
+                <a href="{{ route('menu') }}?category=Frappuccino" class="cat-card" id="cat-frappuccino">
                     <div class="cat-icon">🥤</div>
                     <h3>Frappuccino</h3>
                     <span class="cat-count">12 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-teas">
+                <a href="{{ route('menu') }}?category=Teas+%26+Chai" class="cat-card" id="cat-teas">
                     <div class="cat-icon">🍵</div>
                     <h3>Teas & Chai</h3>
                     <span class="cat-count">16 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-bakery">
+                <a href="{{ route('menu') }}?category=Bakery" class="cat-card" id="cat-bakery">
                     <div class="cat-icon">🥐</div>
                     <h3>Bakery</h3>
                     <span class="cat-count">14 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-food">
+                <a href="{{ route('menu') }}?category=Food+%26+Snacks" class="cat-card" id="cat-food">
                     <div class="cat-icon">🥗</div>
                     <h3>Food & Snacks</h3>
                     <span class="cat-count">20 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-merch">
+                <a href="{{ route('menu') }}?category=Merchandise" class="cat-card" id="cat-merch">
                     <div class="cat-icon">🛍️</div>
                     <h3>Merchandise</h3>
                     <span class="cat-count">30 items</span>
                 </a>
-                <a href="#" class="cat-card" id="cat-gift-cards">
+                <a href="{{ route('menu') }}?category=Gift+Cards" class="cat-card" id="cat-gift-cards">
                     <div class="cat-icon">🎁</div>
                     <h3>Gift Cards</h3>
                     <span class="cat-count">8 designs</span>
@@ -526,7 +528,7 @@
             <div class="footer-col">
                 <h4>Rewards</h4>
                 <ul>
-                    <li><a href="#">Join Rewards</a></li>
+                    <li><a href="{{ route('rewards') }}">Join Rewards</a></li>
                     <li><a href="#">How it Works</a></li>
                     <li><a href="#">Redeem Stars</a></li>
                     <li><a href="#">Tier Benefits</a></li>

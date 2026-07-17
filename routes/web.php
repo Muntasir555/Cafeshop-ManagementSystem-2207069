@@ -3,13 +3,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 
 // ── Public homepage ──────────────────────────────────────────
 Route::get('/', function () {
     return view('welcome');
 });
+
+// ── Public rewards page ───────────────────────────────────────
+Route::get('/rewards', function () {
+    return view('rewards');
+})->name('rewards');
+
+// ── Public menu page ─────────────────────────────────────────
+Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+
+// ── Public order placement (from menu page cart) ──────────────
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 // ── Smart "dashboard" redirect (required by Laravel Breeze) ───
 // Breeze controllers redirect to route('dashboard') after login/register.
@@ -36,9 +49,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
          ->name('products.toggle');
 
     // Orders
-    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-    Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::patch('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');
 
     // Customers
     Route::get('users', [UserController::class, 'index'])->name('users.index');
