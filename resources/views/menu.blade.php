@@ -38,7 +38,6 @@
             <a href="{{ url('/#store-section') }}">Find a Store</a>
         </nav>
 
-        {{-- Right Actions --}}
         <div class="menu-nav-actions">
             {{-- Cart Button --}}
             <button class="nav-cart-btn" id="openCartBtn" aria-label="Open cart" title="View cart">
@@ -51,6 +50,8 @@
             @auth
                 @if(auth()->user()->isAdmin())
                     <a href="{{ route('admin.dashboard') }}" class="btn-nav-signin">Admin</a>
+                @else
+                    <a href="{{ route('dashboard') }}" class="btn-nav-signin">My Account</a>
                 @endif
                 <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                     @csrf
@@ -471,7 +472,14 @@ document.getElementById('checkoutForm').addEventListener('submit', async functio
             return;
         }
 
-        // Success!
+        // Success! We get a Stripe Checkout URL back.
+        // Instead of local modal, we redirect them to Stripe to pay.
+        if (data.checkout_url) {
+            window.location.href = data.checkout_url;
+            return; // Exit here, the browser will leave the page.
+        }
+
+        // Fallback (shouldn't happen with Stripe enabled, but safe to keep)
         closeCart();
         showSuccess(data.order_id, email);
 
