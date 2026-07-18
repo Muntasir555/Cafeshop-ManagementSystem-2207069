@@ -62,6 +62,30 @@
             <span class="kpi-sub">Registered accounts</span>
         </div>
     </div>
+
+    <div class="kpi-card" style="--kpi-accent:#3b82f6;">
+        <div class="kpi-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        </div>
+        <div class="kpi-info">
+            <span class="kpi-label">Active Staff</span>
+            <span class="kpi-value" style="color:#3b82f6;">{{ $totalStaff }}</span>
+            <span class="kpi-sub">Team members on duty</span>
+        </div>
+    </div>
+
+    <a href="{{ route('admin.salaries.pending') }}" style="text-decoration:none;">
+    <div class="kpi-card" style="{{ $pendingSalaries > 0 ? '--kpi-accent:#c82014;' : '--kpi-accent:#006241;' }}">
+        <div class="kpi-icon" style="background:{{ $pendingSalaries > 0 ? 'rgba(200,32,20,0.1)' : 'rgba(0,98,65,0.1)' }};color:{{ $pendingSalaries > 0 ? '#c82014' : '#006241' }};">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        </div>
+        <div class="kpi-info">
+            <span class="kpi-label">Pending Salaries</span>
+            <span class="kpi-value" style="color:{{ $pendingSalaries > 0 ? '#c82014' : '#006241' }};">{{ $pendingSalaries }}</span>
+            <span class="kpi-sub">{{ $pendingSalaries > 0 ? 'Staff awaiting payment ↗' : 'All salaries paid ✓' }}</span>
+        </div>
+    </div>
+    </a>
 </div>
 
 <!-- ═══ CHART + STATUS BREAKDOWN ═══ -->

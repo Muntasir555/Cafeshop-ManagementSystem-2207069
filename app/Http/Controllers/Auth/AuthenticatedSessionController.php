@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -26,10 +27,34 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = auth()->user();
+
+        // Block pending users immediately after login attempt
+        if ($user->isPending()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw ValidationException::withMessages([
+                'email' => 'Your account is awaiting admin approval. Please check back later.',
+            ]);
+        }
+
+        // Block rejected users
+        if ($user->isRejected()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw ValidationException::withMessages([
+                'email' => 'Your registration has been rejected. Please contact support for assistance.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         // Redirect admins to the admin dashboard, customers to the homepage
-        if (auth()->user()->isAdmin()) {
+        if ($user->isAdmin()) {
             return redirect()->intended(route('admin.dashboard'));
         }
 

@@ -10,17 +10,45 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::where('role', 'customer');
+        $search = $request->input('search');
 
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('email', 'like', '%' . $request->search . '%');
-            });
-        }
+        $approvedUsers = User::where('role', 'customer')
+            ->where('status', 'approved')
+            ->when($search, fn ($q) => $q->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            }))
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
 
-        $users = $query->latest()->paginate(15)->withQueryString();
+        $pendingUsers = User::where('role', 'customer')
+            ->where('status', 'pending')
+            ->latest()
+            ->get();
 
-        return view('admin.users.index', compact('users'));
+        $rejectedUsers = User::where('role', 'customer')
+            ->where('status', 'rejected')
+            ->latest()
+            ->get();
+
+        return view('admin.users.index', compact('approvedUsers', 'pendingUsers', 'rejectedUsers', 'search'));
+    }
+
+    public function approve(User $user)
+    {
+        $user->update(['status' => 'approved']);
+
+        return redirect()->route('admin.users.index')
+            ->with('success', "✅ {$user->name} has been approved and can now log in.");
+    }
+
+    public function reject(User $user)
+    {
+        $user->update(['status' => 'rejected']);
+
+        return redirect()->route('admin.users.index')
+            ->with('success', "❌ {$user->name}'s registration has been rejected.");
     }
 }
+

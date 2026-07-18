@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,10 @@ class DashboardController extends Controller
         $todaysOrders     = Order::whereDate('created_at', today())->count();
         $totalProducts    = Product::count();
         $totalCustomers   = User::where('role', 'customer')->count();
+        $totalStaff       = Staff::where('status', 'active')->count();
+        $pendingSalaries  = Staff::where('status', 'active')
+            ->whereDoesntHave('salaryPayments', fn ($q) => $q->where('payment_month', now()->format('Y-m')))
+            ->count();
 
         // Orders by status counts
         $statusCounts = Order::select('status', DB::raw('count(*) as count'))
@@ -46,6 +51,8 @@ class DashboardController extends Controller
             'todaysOrders',
             'totalProducts',
             'totalCustomers',
+            'totalStaff',
+            'pendingSalaries',
             'statusCounts',
             'chartData',
             'recentOrders',
